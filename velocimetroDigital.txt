@@ -1,0 +1,52 @@
+//: Playground - noun: a place where people can play
+
+import UIKit
+
+enum Velocidades : Int {
+    case Apagado = 0
+    case VelocidadBaja = 20
+    case VelocidadMedia = 50
+    case VelocidadAlta = 120
+    
+    init(velocidadInicial: Velocidades) {
+        self = velocidadInicial
+    }
+}
+
+class Auto {
+    var velocidad : Velocidades
+    
+    init() {
+        self.velocidad = Velocidades(velocidadInicial: .Apagado)
+    }
+    
+    func cambioDeVelocidad() -> (actual : Int, velocidadEnCadena: String) {
+        var velocidadNombre : String = ""
+        
+        switch self.velocidad {
+            case .Apagado:
+                self.velocidad = .VelocidadBaja
+                velocidadNombre = "Velocidad baja"
+            case .VelocidadBaja:
+                self.velocidad = .VelocidadMedia
+                velocidadNombre = "Velocidad media"
+            case .VelocidadMedia:
+                self.velocidad = .VelocidadAlta
+                velocidadNombre = "Velocidad alta"
+            case .VelocidadAlta:
+                self.velocidad = .VelocidadMedia
+                velocidadNombre = "Velocidad media"
+        }
+        
+        return (self.velocidad.rawValue,velocidadNombre)
+    }
+}
+
+var Toyota = Auto()
+
+// Se imprime una tupla con la velocidad inicial del Objeto Auto
+print((Toyota.velocidad.rawValue,"Apagado"))
+
+for i in 0..<20 {
+    print(Toyota.cambioDeVelocidad())
+}
